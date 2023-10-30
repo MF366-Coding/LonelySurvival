@@ -15,7 +15,7 @@
 Copyright (C) 2023  MF366
 ```
 
-**You're a kid who is home alone and there's a kill that wants to kill you.**
+**You're a kid who is home alone and there's a killer that wants to kill you.**
 
 ## How to play
 Defend yourself in this psychological horror game. You can use weapons, shields and much more to defend yourself from the killer.
