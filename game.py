@@ -48,7 +48,24 @@ def break_point():
     start_point()
 
 
+death_ends = ("te", "me", "woe", "bete")
+
+def death(death_msg: str):
+    print(f"""{Fore.RED}
+██    ██  ██████  ██    ██     ██████  ██ ███████ ██████  ██ 
+ ██  ██  ██    ██ ██    ██     ██   ██ ██ ██      ██   ██ ██ 
+  ████   ██    ██ ██    ██     ██   ██ ██ █████   ██   ██ ██ 
+   ██    ██    ██ ██    ██     ██   ██ ██ ██      ██   ██    
+   ██     ██████   ██████      ██████  ██ ███████ ██████  ██ 
+                                                             
+                              """)
+
+    input(f"Mistakes were made{Fore.RESET}\n{death_msg}\n...\nI'll restart for you, buddy!")
+    start_game()
+
+
 def start_game():
+    # [i] Day 1
     if y[0]["day"] == 1:
         print(f'''{Fore.GREEN}
 ██████   █████  ██    ██      ██ 
@@ -92,6 +109,20 @@ def start_game():
         output(f"{Fore.MAGENTA}You", "E-E-E-Exc-Excuse me??")
         output(f"{Fore.RED}Mad Person (Killer???)", "Get ready! 'Cause I'm coming for ya...")
 
+        if y[1]["last-end"] in death_ends:
+            output(f"{Fore.RED}Killer", "(Last time I did this, things didn't go according to the plan...)")
+
+        if y[1]["last-end"] == "we":
+            output(f"{Fore.RED}Killer", "Fun Fact: the last kid I tortured ended up teaming with me.\nBye, kiddo!")
+
+        if y[1]["last-end"] == "se":
+            output(f"{Fore.RED}Killer", "I hope you don't take your own life just like the previous kid...\nThat's cheating and it ruins the fun!!")
+
+        if y[1]["last-end"] == "ne":
+            output(f"{Fore.RED}Killer", "Also... er... all Mondays? Home alone?")
+            output(f"{Fore.MAGENTA}You", "I'm in shock!")
+            output(f"{Fore.RED}Killer", "So it's a yes! See you next Monday kiddo...")
+
         input(f"{Fore.RED}The other side hang up.\n")
 
         output(f"{Fore.MAGENTA}You", ".")
@@ -125,6 +156,7 @@ def start_game():
             time.sleep(1.7)
             sys.exit()
 
+    # [i] Day 2
     if y[0]["day"] == 2:
         print(f'''{Fore.GREEN}
 ██████   █████  ██    ██     ██████ 
@@ -254,18 +286,7 @@ def start_game():
 
             output(f"{Fore.RED}Killer", "Uh...\nWell, that was easy!")
 
-            print(f"""{Fore.RED}
-██    ██  ██████  ██    ██     ██████  ██ ███████ ██████  ██ 
- ██  ██  ██    ██ ██    ██     ██   ██ ██ ██      ██   ██ ██ 
-  ████   ██    ██ ██    ██     ██   ██ ██ █████   ██   ██ ██ 
-   ██    ██    ██ ██    ██     ██   ██ ██ ██      ██   ██    
-   ██     ██████   ██████      ██████  ██ ███████ ██████  ██ 
-                                                             
-                              """)
-
-            input(f"Mistakes were made{Fore.RESET}\nIf chairs were shields, I'd be equipped for war.\n...\nI'll restart for you, buddy!")
-
-            start_game()
+            death("If chairs were shields, I'd be equipped for war.")
 
         if weap == "pillow":
             output(f"{Fore.MAGENTA}You", "I'm not sure how a pillow will protect me but whatever...")
@@ -280,18 +301,7 @@ def start_game():
                 uses_gun.play()
                 time.sleep(2.2)
 
-            print(f"""{Fore.RED}
-██    ██  ██████  ██    ██     ██████  ██ ███████ ██████  ██ 
- ██  ██  ██    ██ ██    ██     ██   ██ ██ ██      ██   ██ ██ 
-  ████   ██    ██ ██    ██     ██   ██ ██ █████   ██   ██ ██ 
-   ██    ██    ██ ██    ██     ██   ██ ██ ██      ██   ██    
-   ██     ██████   ██████      ██████  ██ ███████ ██████  ██ 
-                                                             
-                              """)
-
-            input(f"Mistakes were made{Fore.RESET}\nFirst, WHADAHELL IS WRONG WITH YOU?!\nSecond, no way bro actually shot you 20 times\n...\nI'll restart for you, buddy!")
-
-            start_game()
+            death("First, WHADAHELL IS WRONG WITH YOU?!\nSecond, no way bro actually shot you 20 times")
 
         if weap == "oil":
             output(f"{Fore.MAGENTA}You", "HEY STUPID KILLER! COME! THE DOOR ISN'T LOCKED!")
@@ -303,18 +313,7 @@ def start_game():
             time.sleep(0.25)
             uses_gun.play()
             time.sleep(2)
-            print(f"""{Fore.RED}
-██    ██  ██████  ██    ██     ██████  ██ ███████ ██████  ██ 
- ██  ██  ██    ██ ██    ██     ██   ██ ██ ██      ██   ██ ██ 
-  ████   ██    ██ ██    ██     ██   ██ ██ █████   ██   ██ ██ 
-   ██    ██    ██ ██    ██     ██   ██ ██ ██      ██   ██    
-   ██     ██████   ██████      ██████  ██ ███████ ██████  ██ 
-                                                             
-                              """)
-
-            input(f"Mistakes were made{Fore.RESET}\nI quit.\n...\nI'll restart for you, buddy!")
-
-            start_game()
+            death("I quit.")
 
         print(f"""{Fore.YELLOW}
 ██    ██  ██████  ██    ██     ███████ ██    ██ ██████  ██    ██ ██ ██    ██ ███████ ██████  ██ 
@@ -338,7 +337,35 @@ def start_game():
         if keyboard.is_pressed('2'):
             time.sleep(1.7)
             sys.exit()
-            
+
+    # [i] Day 3
     if y[0]["day"] == 3:
+        print(f'''{Fore.GREEN}
+██████   █████  ██    ██     ██████ 
+██   ██ ██   ██  ██  ██           ██ 
+██   ██ ███████   ████        █████  
+██   ██ ██   ██    ██             ██ 
+██████  ██   ██    ██        ██████  
+                                    
+                                            ''')
+        input(f"{Fore.CYAN}As you go home after school, you notice your parents haven't arrived yet. Looks like you'll be alone for 2 hours.\n")
+        output(f"{Fore.MAGENTA}You", "Yet another day alone! What should I do to relax?")
+        print("""1) Finish the homework
+2) Play videogames
+3) Watch YouTube
+        """)
+
+        read_event()
+
+        if keyboard.is_pressed("3"):
+            output(f"{Fore.MAGENTA}You", "I guess I'll watch my favorite youtuber...")
+
+        if keyboard.is_pressed("1"):
+            output(f"{Fore.MAGENTA}You", "I don't want to disappoint my parents so I'll do my homework...")
+
+        if keyboard.is_pressed("2"):
+            output(f"{Fore.MAGENTA}You", "Imma play this new game!\nAlthrought it might be the last time I play it.")
+
+        input(f"{Fore.BLUE}1 HOUR AND 35 MINUTES LATER{Fore.RESET}\n")
+
         raise NotImplementedError
-        
