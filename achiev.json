@@ -11,6 +11,8 @@
     "regular-end": false,
     "alt-112": false,
     "school": false,
+    "mean": false,
+    "start": false,
     "ge": 0,
     "te": 0,
     "be": 0,

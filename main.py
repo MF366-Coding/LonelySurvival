@@ -28,7 +28,7 @@ if __name__ == '__main__':
 ███████  ██████  ██   ██   ████   ██   ████   ██   ██ ███████ 
                                                               
                                                               """)
-    print(f"{Fore.YELLOW}LonelySurvival  Copyright (C) 2023  MF366\n")
+    print(f"{Fore.YELLOW}LonelySurvival  Copyright (C) 2023  MF366\n")   
     input(f"{Fore.MAGENTA}Hit ENTER to start...{Fore.RESET}")
     game.start_point()
     
