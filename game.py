@@ -407,11 +407,15 @@ def start_game():
 
         input(f"{Fore.RED}You hang up.\n")
 
-        # [!!] TO BE CHANGED TOMORROW VERY URGENT
+        output(f"{Fore.MAGENTA}You", "If that Lotus comes, maybe she can protect me?")
+        output(f"{Fore.MAGENTA}You", "I don't think she would want to and that's the whole problem!")
+        
+        input(f"{Fore.BLUE}20 MINUTES LATER{Fore.RESET}\n")
+        
+        output(f"{Fore.MAGENTA}You", "So, you're Helena?")
+        
         raise NotImplementedError
-
-        output(f"{Fore.MAGENTA}You", "If he thinks I'll just stand here not doing anything, he's wrong!")
-        output(f"{Fore.MAGENTA}You", "However I probably need some sort of Weapon or Armor.")
+        
         output(f"{Fore.MAGENTA}You", "I was able to gather some stuff but what should I use?")
         print("""1) Pillow [Not a weapon but can be used to block the killer for a short while.]
 2) Chair [Can be used both as weapon and as a shield. It can also block doors from inside.]
