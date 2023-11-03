@@ -15,6 +15,9 @@ sounds_dir = os.path.join(script_dir, "sounds")
 
 loads_gun = mixer.Sound(os.path.join(sounds_dir, "load_gun.mp3"))
 uses_gun = mixer.Sound(os.path.join(sounds_dir, "gun.mp3"))
+explosion = mixer.Sound(os.path.join(sounds_dir, "explosion.mp3"))
+ringding = mixer.Sound(os.path.join(sounds_dir, "ring.mp3"))
+hose = mixer.Sound(os.path.join(sounds_dir, "hose.mp3"))
 
 def read_event(suppress: bool = False) -> keyboard.KeyboardEvent:
     time.sleep(1.0)
@@ -65,10 +68,17 @@ def death(death_msg: str):
 
 
 def start_game():
+    global y
+    
     if not y[1]["start"]:
         y[1]["start"] = True
+        y[1]["achievs"] += 1
         saves.save(y[0], y[1])
         input(f"{Fore.CYAN}Achievment Unlocked: {Fore.YELLOW}The Start of a New Adventure{Fore.RESET}\nStart Day 1 for the very first time.\n")
+        y = saves.load()
+        
+    print(f"{Fore.YELLOW}{y[1]['achievs']}/11{Fore.RESET} Achievments Unlocked")
+    print(f"{Fore.YELLOW}{y[1]['endings']}/11{Fore.RESET} Endings Unlocked\n")
     
     # [i] Day 1
     if y[0]["day"] == 1:
@@ -100,6 +110,9 @@ def start_game():
 
         input(f"{Fore.BLUE}1 HOUR AND 45 MINUTES LATER{Fore.RESET}\n")
 
+        ringding.play()
+        time.sleep(1.20)
+
         input(f"{Fore.GREEN}The phone is ringing. You decide to pick it up.\n")
 
         output(f"{Fore.MAGENTA}You", "Hello. Who am I talking to?")
@@ -124,9 +137,9 @@ def start_game():
             output(f"{Fore.RED}Killer", "I hope you don't take your own life just like the previous kid...\nThat's cheating and it ruins the fun!!")
 
         if y[1]["last-end"] == "ne":
-            output(f"{Fore.RED}Killer", "Also... er... all Mondays? Home alone?")
-            output(f"{Fore.MAGENTA}You", "I'm in shock!")
-            output(f"{Fore.RED}Killer", "So it's a yes! See you next Monday kiddo...")
+            output(f"{Fore.RED}Killer", "Also... er... all Mondays? All of them home alone?")
+            output(f"{Fore.MAGENTA}You", "...uhhh...")
+            output(f"{Fore.RED}Killer", f"I'll count that as a {Fore.YELLOW}'yes'{Fore.RESET}! See you next Monday kiddo...")
 
         input(f"{Fore.RED}The other side hang up.\n")
 
@@ -191,6 +204,9 @@ def start_game():
             output(f"{Fore.MAGENTA}You", "Who doesn't love a quick nap?\nHowever, with this killer out there I should be ready for action I guess...")
 
         input(f"{Fore.BLUE}1 HOUR AND 35 MINUTES LATER{Fore.RESET}\n")
+
+        ringding.play()
+        time.sleep(1.20)
 
         input(f"{Fore.GREEN}The phone is ringing. You're shaking, but still decide to pick it up.\n")
 
@@ -374,6 +390,9 @@ def start_game():
 
         input(f"{Fore.BLUE}1 HOUR LATER{Fore.RESET}\n")
 
+        ringding.play()
+        time.sleep(1.20)
+
         input(f"{Fore.GREEN}The phone is ringing. As usual, you decide to pick it up.\n")
 
         output(f"{Fore.MAGENTA}You", "It's you again, loser.")
@@ -392,7 +411,9 @@ def start_game():
             
             if not y[1]["mean"]:
                 y[1]["mean"] = True
+                y[1]["achievs"] += 1
                 saves.save(y[0], y[1])
+                y = saves.load()
                 input(f"{Fore.CYAN}Achievment Unlocked: {Fore.YELLOW}Meanie{Fore.RESET}\nBe mean to Officer Lotus.\n")
 
         if keyboard.is_pressed("3"):
@@ -429,12 +450,35 @@ def start_game():
         output(f"{Fore.MAGENTA}You", "Ok, so I want to stay alive, right?\nThen I shouldn't comment about how ugly you are.")
         output(f"{Fore.BLUE}Lotus", f"I SWEAR I'LL BREAK YOUR {Fore.RED}DEMENTED SKULL{Fore.RESET}!!")
         
-        raise NotImplementedError("Feeling lazy, will work on this tomorrow...")
+        ringding.play()
+        time.sleep(1.20)
         
-        output(f"{Fore.MAGENTA}You", "I was able to gather some stuff but what should I use?")
-        print("""1) Pillow [Not a weapon but can be used to block the killer for a short while.]
-2) Chair [Can be used both as weapon and as a shield. It can also block doors from inside.]
-3) Oil [It makes the floor slippery.]
+        input(f"{Fore.GREEN}The phone is ringing. Again.\n")
+        
+        output(f"{Fore.BLUE}Lotus", "Hello... How can I help you?")
+        output(f"{Fore.RED}Killer", "Who the bloody hell are you?")
+        output(f"{Fore.BLUE}Lotus", "Police Officer Helena Lotus.")
+        output(f"{Fore.RED}Killer", "Ok then! Wrong number, I guess...")
+        
+        loads_gun.play()
+        time.sleep(0.25)
+        uses_gun.play()
+        time.sleep(2)
+        
+        output(f"{Fore.BLUE}Lotus", "WHAT HAPPENED?")
+        output(f"{Fore.RED}Killer", "A lady! She was shot at! I saw it all!")
+        output(f"{Fore.BLUE}Lotus", "Where did it happen?")
+        output(f"{Fore.RED}Killer", "Wicked Street, 81.")
+        output(f"{Fore.BLUE}Lotus", "Aihgt, I'm coming.\nAnything is better than forcing a child into completing a survey.")
+        
+        input(f"{Fore.RED}Helena hang up and left.\n")
+        
+        output(f"{Fore.MAGENTA}You", "I know what's gonna happen so I should find some stuff to defend myself with...")
+        output(f"{Fore.MAGENTA}You", "There we go!")
+        
+        print("""1) Key [Can lock the door.]
+2) Pillow filled with Bricks [Instakills or severely hurts someone if used correctly.]
+3) Hose [It can push the killer because of its pressure...?]
         """)
 
         weap = None
@@ -442,71 +486,67 @@ def start_game():
         read_event()
 
         if keyboard.is_pressed("1"):
-            output(f"{Fore.MAGENTA}You", "I guess I'll take... a pillow? Yeah, I guess...")
-            weap = "pillow"
+            output(f"{Fore.MAGENTA}You", "Time to lock myself up!")
+            weap = "key"
 
         if keyboard.is_pressed("2"):
-            output(f"{Fore.MAGENTA}You", "Now this is hard to handle.")
-
-            print("""1) Use the chair as a weapon by throwing it
-2) Use it to block attacks
-3) Use it to lock the door from inside
-""")
-
-            read_event()
-
-            if keyboard.is_pressed("1"):
-                output(f"{Fore.MAGENTA}You", "Alright... Hope I stay alive...")
-                weap =  "chair-attack"
-                y[0]["weapons"] += 1
-
-            if keyboard.is_pressed("2"):
-                output(f"{Fore.MAGENTA}You", "Let's do this then...")
-                weap = "chair-shield"
-
-            if keyboard.is_pressed("3"):
-                output(f"{Fore.MAGENTA}You", "I should play defensive so I'm locking the door.")
-                weap = "chair-lock"
-
+            output(f"{Fore.MAGENTA}You", "I'll break his face with this!")
+            weap = "pillow"
 
         if keyboard.is_pressed("3"):
-            output(f"{Fore.MAGENTA}You", "I should probably spread this on the floor...\nThere, it's done!")
-            weap = "oil"
+            output(f"{Fore.MAGENTA}You", "...Uh, alrighty then, I guess...")
+            weap = "hose"
 
-        if weap == "chair-attack":
-            output(f"{Fore.MAGENTA}You", "I really don't want to do this...")
-            output(f"{Fore.MAGENTA}You", "Uh... Here goes nothing...")
-            output(f"{Fore.RED}Killer", "I honestly thought you'd never show up.\nI thought you were going to lock yourself and hide like the cry baby you are.")
-            output(f"{Fore.RED}Killer", "You can't do anything.\nYou're all alone.\nDaddy, mommy, come help me before I get shot 20 times on the head.\nScream, boy...\nI'll be outta here faster that my dad getting milk.")
-            output(f"{Fore.MAGENTA}You", "I'm no ordinary kid. You shall be punished for what you're trying to do to me.")
-            output(f"{Fore.RED}Killer", f"Don't make me laugh, kiddo. You can't win this fight...\nThe fight against {Fore.RED}death{Fore.RESET}.\nEnjoy your death, bastard.")
-            output(f"{Fore.MAGENTA}You", "You asked for it.")
-            input(f"{Fore.BLUE}Like a master, you grabbed the chair and threw it at the killer.\nWhile falling down the stairs, he cursed at you. Several times.{Fore.RESET}")
-            output(f"{Fore.MAGENTA}You", "Get the freak outta here, you nasty piece of s***! No wonder your dad left you.")
-
-        if weap == "chair-lock":
-            output(f"{Fore.MAGENTA}You", "I'll be safe if I lock the door, right?")
-            output(f"{Fore.MAGENTA}You", "Alright there we go!")
-            output(f"{Fore.RED}Killer", "I thought so. I knew you were going to lock yourself and hide like the cry baby you are.")
-            output(f"{Fore.RED}Killer", "You can't do anything.\nYou're all alone.\nDaddy, mommy, come help me before I get shot 20 times on the head.\nScream, boy...\nI'll be outta here faster that my dad getting milk.")
-            output(f"{Fore.MAGENTA}You", "Well, good luck unlocking the door weirdo.")
-            output(f"{Fore.RED}Killer", "(This situation sucks, I need to learn how to break into a locked house. Lonelingo has math, languages and robbing stuff so I guess it could work.)")
-            output(f"{Fore.RED}Killer", "I'll come back with the needed info to finish the job.")
-            output(f"{Fore.MAGENTA}You", "That's right, loser! Get outta here, you nasty piece of s***! No wonder your dad left you.")
-
-        if weap == "chair-shield":
-            output(f"{Fore.MAGENTA}You", "I literally have a shield. His bullets will be stopped.")
-            output(f"{Fore.MAGENTA}You", "Alright here I go!")
-            output(f"{Fore.RED}Killer", "Look who it is. The kid I need to kill... and he's holding a chair.")
-            output(f"{Fore.MAGENTA}You", "You can't do anything.\nMy shield stops your bullets.")
-            output(f"{Fore.RED}Killer", "Then I guess we can test that!")
-
+        if weap == "key":
+            output(f"{Fore.MAGENTA}You", "There we go! I'd like to see the killer try picking this lock...")
+            output(f"{Fore.RED}Killer", "KID! I KNOW YOU'RE INSIDE! Your babysitter/officer told me, She's so dumb...")
+            output(f"{Fore.MAGENTA}You", "I know, right?")
+            output(f"{Fore.RED}Killer", "Welp, time to pick a lock...")
+            print(f"{Fore.MAGENTA}You{Fore.RESET}\nWait, wha-\n")
+            
             loads_gun.play()
             time.sleep(0.25)
             uses_gun.play()
             time.sleep(2)
+            
+            death("Everyone learns something new everyday:\nThe killer learned how to pick a lock and you learned he can do that!")
 
-            output(f"{Fore.RED}Killer", "Uh...\nWell, that was easy!")
+        if weap == "pillow":
+            output(f"{Fore.MAGENTA}You", "Okay, I'm ready! Let's do this!")
+            output(f"{Fore.RED}Killer", "Yo, kid! I'll give you 10 seconds for us to talk... No weapons, no s***. Just chit chat!")
+            output(f"{Fore.MAGENTA}You", "Well, what if you take this pillow filled with bricks!")
+            time.sleep(1)
+            output(f"{Fore.MAGENTA}You", "...Well, this is awkward...")
+            output(f"{Fore.MAGENTA}You", "This didn't go according to my plan! I can't lift the f***ing pillow!!")
+            output(f"{Fore.MAGENTA}You", "Speaking of chit chat, how are you, my friend?")
+            output(f"{Fore.RED}Killer", "Good, since I can now blast your a** off!")
+            
+            loads_gun.play()
+            time.sleep(0.25)
+            uses_gun.play()
+            time.sleep(2)
+            
+            output(f"{Fore.RED}Killer", "It's the first time someone asked how I was doing since my dad left me...")
+            
+            loads_gun.play()
+            time.sleep(0.25)
+            uses_gun.play()
+            time.sleep(2)
+            
+            death("Wait, I'm confused? Do killers have emotions, bruh?")
+
+        raise NotImplementedError
+
+        if weap == "hose":
+            output(f"{Fore.MAGENTA}You", "Ok time to power up the hose. As soon as I press this button, the pressure will be way too much for anyone...")
+            output(f"{Fore.MAGENTA}You", "Alright here I go!")
+            output(f"{Fore.RED}Killer", "Look who it is. The kid I need to kill... and he's holding... a hose?")
+            output(f"{Fore.MAGENTA}You", "Yeah, and I'll use it to blast your a** off...")
+            print(f"{Fore.RED}Killer{Fore.RESET}\nThen I guess we can test tha-\n")
+
+            hose.set_volume(0.7)
+
+            output(f"{Fore.MAGENTA}You", "Ok, I'm actually impressed!")
 
             death("If chairs were shields, I'd be equipped for war.")
 

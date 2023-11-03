@@ -3,7 +3,6 @@
     "endings": 0,
     "secrets": 0,
     "regular": 0,
-    
     "pizza": false,
     "alt-pizza": false,
     "betrayal": false,
@@ -15,19 +14,16 @@
     "school": false,
     "mean": false,
     "start": false,
-    
     "ge": 0,
     "te": 0,
     "be": 0,
     "fe": 0,
     "woe": 0,
     "se": 0,
-
     "we": 0,
     "ne": 0,
     "he": 0,
     "me": 0,
     "bete": 0,
-    
     "last-end": null
 }
