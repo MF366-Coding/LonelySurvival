@@ -413,8 +413,23 @@ def start_game():
         input(f"{Fore.BLUE}20 MINUTES LATER{Fore.RESET}\n")
         
         output(f"{Fore.MAGENTA}You", "So, you're Helena?")
+        output(f"{Fore.BLUE}Lotus", "Isn't that obvious kid? Who would I be?")
         
-        raise NotImplementedError
+        print("""1) My friend's grandma
+2) Your mother
+3) Someone prettier than you
+""")
+
+        read_event()
+        
+        output(f"{Fore.BLUE}Lotus", "I hate you so much kid...")
+        output(f"{Fore.MAGENTA}You", "Well, I'm sure you also hate your face then.")
+        output(f"{Fore.BLUE}Lotus", "Am I that ugly?")
+        output(f"{Fore.MAGENTA}You", "Lemme think about that for a second...")
+        output(f"{Fore.MAGENTA}You", "Ok, so I want to stay alive, right?\nThen I shouldn't comment about how ugly you are.")
+        output(f"{Fore.BLUE}Lotus", f"I SWEAR I'LL BREAK YOUR {Fore.RED}DEMENTED SKULL{Fore.RESET}!!")
+        
+        raise NotImplementedError("Feeling lazy, will work on this tomorrow...")
         
         output(f"{Fore.MAGENTA}You", "I was able to gather some stuff but what should I use?")
         print("""1) Pillow [Not a weapon but can be used to block the killer for a short while.]
