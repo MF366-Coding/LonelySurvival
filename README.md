@@ -1,4 +1,7 @@
 # LonelySurvival
+
+## *The development of this project on GitHub has stopped permanently since I will be using GameMaker instead of Python, to provide an easy GUI.*
+
 ```
 ██       ██████  ███    ██ ███████ ██   ██    ██              
 ██      ██    ██ ████   ██ ██      ██    ██  ██               
